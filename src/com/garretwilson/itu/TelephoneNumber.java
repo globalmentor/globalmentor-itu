@@ -2,6 +2,8 @@ package com.garretwilson.itu;
 
 import java.net.URI;
 import java.util.*;
+
+import com.garretwilson.model.*;
 import com.garretwilson.text.CharacterConstants;
 import com.garretwilson.util.*;
 
