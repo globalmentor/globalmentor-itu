@@ -1,6 +1,9 @@
 package com.garretwilson.itu;
 
+import java.net.URI;
 import java.util.*;
+import com.garretwilson.text.CharacterConstants;
+import com.garretwilson.util.*;
 
 /**International public telecommunication number for geographic areas
 	as defined in ITU-T E.164,
@@ -8,10 +11,12 @@ import java.util.*;
 	The telephone number is formatted according to ITU-T E.123,
 	"Notation for national and international telephone numbers, e-mail addresses
 	and Web addresses".
+TODO update comments to match the new TEL URI RFC when it comes out
 @author Garret Wilson
 */
-public class TelephoneNumber implements TelephoneNumberConstants
+public class TelephoneNumber extends DefaultResource implements TelephoneNumberConstants
 {
+
 	/**The country code for geographic areas.*/
 	private final String countryCode;
 
@@ -39,17 +44,32 @@ public class TelephoneNumber implements TelephoneNumberConstants
 		@exception ArrayIndexOutOfBoundsException Thrown if an invalid index is given.
 		*/
 		public String getSubscriberNumberComponent(final int index) {return subscriberNumberComponents[index];}
-		
-		/**@return A string representing the subscriber number as specified in ITU-T E.123.*/ 
-		public String getSubscriberNumber()
+
+		/**Constructs a string with the subscriber number, separating the components
+			with the given delimiter.
+		@param delimiter The delimiter to use to separate the subscriber number
+			components, or <code>CharacterConstants.NULL_CHAR</code> (Unicode code
+			point 0) if no delimiter should be used.
+		@return A string representing the subscriber number.
+		@see CharacterConstants#NULL_CHAR
+		*/ 
+		public String getSubscriberNumber(final char delimiter)
 		{
 			final StringBuffer stringBuffer=new StringBuffer();	//create a string buffer to hold the subscriber number components
 			for(int i=0; i<subscriberNumberComponents.length-1; ++i)	//look at each the subscriber number components except the last one
 			{
-				stringBuffer.append(subscriberNumberComponents[i]).append(COMPONENT_SEPARATOR);	//add this component, followed by a space 
+				stringBuffer.append(subscriberNumberComponents[i]);	//append this component
+				if(delimiter!=CharacterConstants.NULL_CHAR)	//if the delimiter is not the null character
+					stringBuffer.append(delimiter);	//add the delimiter
 			}
 			stringBuffer.append(subscriberNumberComponents[subscriberNumberComponents.length-1]);	//append the last component
 			return stringBuffer.toString();	//return the subscriber number we constructed 
+		}
+		
+		/**@return A string representing the subscriber number as specified in ITU-T E.123.*/ 
+		public String getSubscriberNumber()
+		{
+			return getSubscriberNumber(COMPONENT_SEPARATOR);	//create the subscriber number, using a space as a delimiter
 		}
 
 	/**Constructs a telephone number from its separate components.
@@ -69,7 +89,8 @@ public class TelephoneNumber implements TelephoneNumberConstants
 		{
 			//G***check this subscriber number componet
 			subscriberNumberComponents[i]=tokenizer.nextToken();		//get this subscriber number component 
-		}		
+		}
+		setReferenceURI(URI.create("tel:"+toString(CharacterConstants.NULL_CHAR)));	//construct and set the reference URI 
 	}
 
 	/**Constructs a telephone number by parsing the given string.
@@ -113,16 +134,33 @@ public class TelephoneNumber implements TelephoneNumberConstants
 		{
 			throw new TelephoneNumberSyntaxException(string, "Telephone number missing country code");	//indicate a missing international prefix
 		}
+		setReferenceURI(URI.create("tel:"+toString(CharacterConstants.NULL_CHAR)));	//construct and set the reference URI 
+	}
+
+	/**Constructs a string representation of the telephone number.
+	@param delimiter The delimiter to use to separate the telephone number
+		components, or <code>CharacterConstants.NULL_CHAR</code> (Unicode code
+		point 0) if no delimiter should be used.
+	@return A string representation of the telephone number using the specified
+		delimiter.
+	@see CharacterConstants#NULL_CHAR
+	*/
+	public String toString(final char delimiter)
+	{
+		final StringBuffer stringBuffer=new StringBuffer();	//create a string buffer to hold the telephone number
+		stringBuffer.append(INTERNATIONAL_PREFIX).append(getCountryCode());	//append the country code
+		if(delimiter!=CharacterConstants.NULL_CHAR)	//if the delimiter is not the null character
+			stringBuffer.append(delimiter);	//add the delimiter
+		stringBuffer.append(getNationalDestinationCode());	//append the national destination code
+		if(delimiter!=CharacterConstants.NULL_CHAR)	//if the delimiter is not the null character
+			stringBuffer.append(delimiter);	//add the delimiter
+		stringBuffer.append(getSubscriberNumber(delimiter));	//append the subscriber number, using the given delimiter
+		return stringBuffer.toString();	//return the telephone number we constructed 
 	}
 
 	/**@return A string representation of the telephone number as specified in ITU-T E.123.*/ 
 	public String toString()
 	{
-		final StringBuffer stringBuffer=new StringBuffer();	//create a string buffer to hold the telephone number
-		stringBuffer.append(INTERNATIONAL_PREFIX).append(getCountryCode()).append(COMPONENT_SEPARATOR);	//append the country code
-		stringBuffer.append(getNationalDestinationCode()).append(COMPONENT_SEPARATOR);	//append the national destination code
-		stringBuffer.append(getSubscriberNumber());	//append the subscriber number
-		return stringBuffer.toString();	//return the telephone number we constructed 
+		return toString(COMPONENT_SEPARATOR);	//return the string, using a space as a delimiter
 	}
-
 }
