@@ -159,8 +159,14 @@ public class TelephoneNumber extends DefaultResource implements TelephoneNumberC
 	}
 
 	/**@return A string representation of the telephone number as specified in ITU-T E.123.*/ 
-	public String toString()
+	public String toCanonicalString()
 	{
 		return toString(COMPONENT_SEPARATOR);	//return the string, using a space as a delimiter
+	}
+
+	/**@return A string representation of the telephone number as specified in ITU-T E.123.*/ 
+	public String toString()
+	{
+		return toCanonicalString();	//return the canonical telephone number string
 	}
 }
