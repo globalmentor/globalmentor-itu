@@ -62,7 +62,10 @@ public class TelephoneNumber extends DefaultResource implements TelephoneNumberC
 				if(delimiter!=CharacterConstants.NULL_CHAR)	//if the delimiter is not the null character
 					stringBuffer.append(delimiter);	//add the delimiter
 			}
-			stringBuffer.append(subscriberNumberComponents[subscriberNumberComponents.length-1]);	//append the last component
+			if(subscriberNumberComponents.length>0)	//if there are subscriber number components
+			{
+				stringBuffer.append(subscriberNumberComponents[subscriberNumberComponents.length-1]);	//append the last component
+			}
 			return stringBuffer.toString();	//return the subscriber number we constructed 
 		}
 		
