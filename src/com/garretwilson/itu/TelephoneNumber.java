@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.garretwilson.model.*;
 import com.garretwilson.text.CharacterConstants;
+import com.garretwilson.text.SyntaxException;
 import com.garretwilson.util.*;
 
 /**International public telecommunication number for geographic areas
@@ -81,20 +82,20 @@ public class TelephoneNumber extends DefaultResource implements TelephoneNumberC
 	@param cc The country code for geographic areas.
 	@param ndc The national destination code
 	@param sn The subscriber number.
-	@exception TelephoneNumberSyntaxException Thrown if the values violate ITU-T
+	@exception SyntaxException Thrown if the values violate ITU-T
 		E.164.
 	*/
-	public TelephoneNumber(final String cc, final String ndc, final String sn) throws TelephoneNumberSyntaxException
+	public TelephoneNumber(final String cc, final String ndc, final String sn) throws SyntaxException
 	{
 			//TODO check each portion of the telephone number for validity
 		if(cc==null || cc.length()==0)	//if there is no country code
-			throw new TelephoneNumberSyntaxException(cc, "Telephone number missing country code.");	//indicate a missing international prefix
+			throw new SyntaxException(cc, "Telephone number missing country code.");	//indicate a missing international prefix
 		countryCode=cc;	//save the country code
 		if(ndc==null || ndc.length()==0)	//if there is no national destination code
-			throw new TelephoneNumberSyntaxException(ndc, "Telephone number missing national destination code.");	//indicate a missing international prefix
+			throw new SyntaxException(ndc, "Telephone number missing national destination code.");	//indicate a missing international prefix
 		nationalDestinationCode=ndc;	//save the national destination code
 		if(sn==null || sn.length()==0)	//if there is no subscriber number
-			throw new TelephoneNumberSyntaxException(sn, "Telephone number missing subscriber number.");	//indicate a missing international prefix
+			throw new SyntaxException(sn, "Telephone number missing subscriber number.");	//indicate a missing international prefix
 		final StringTokenizer tokenizer=new StringTokenizer(sn, "-"+COMPONENT_SEPARATOR);	//divide the subscriber number string into tokens
 		subscriberNumberComponents=StringTokenizerUtilities.getTokens(tokenizer);	//get the subscriber number components
 		setReferenceURI(URI.create("tel:"+toString(CharacterConstants.NULL_CHAR)));	//construct and set the reference URI 
@@ -104,13 +105,13 @@ public class TelephoneNumber extends DefaultResource implements TelephoneNumberC
 	Expects the country code to begin with '+' and accepts code field delimiters
 		of '-' and ' '. 
 	@param string The string to be parsed into a telephone number.
-	@exception TelephoneNumberSyntaxException Thrown if the value violates ITU-T
+	@exception SyntaxException Thrown if the value violates ITU-T
 		E.164.
 	*/
-	public TelephoneNumber(final String string) throws TelephoneNumberSyntaxException
+	public TelephoneNumber(final String string) throws SyntaxException
 	{
 		if(string.length()==0 || string.charAt(0)!=INTERNATIONAL_PREFIX)	//if the string doesn't start with the international prefix
-			throw new TelephoneNumberSyntaxException(string, "Telephone number missing international prefix (+)", 0);	//indicate a missing international prefix
+			throw new SyntaxException(string, "Telephone number missing international prefix (+)", 0);	//indicate a missing international prefix
 		final StringTokenizer tokenizer=new StringTokenizer(string.substring(1), "-"+COMPONENT_SEPARATOR);	//divide the string into tokens
 		if(tokenizer.hasMoreTokens())	//if there is a country code
 		{
@@ -129,17 +130,17 @@ public class TelephoneNumber extends DefaultResource implements TelephoneNumberC
 				}
 				else	//if there is no subscriber number
 				{
-					throw new TelephoneNumberSyntaxException(string, "Telephone number missing subscriber number");	//indicate a missing international prefix
+					throw new SyntaxException(string, "Telephone number missing subscriber number");	//indicate a missing international prefix
 				}
 			}
 			else	//if there is no country code
 			{
-				throw new TelephoneNumberSyntaxException(string, "Telephone number missing national destination code");	//indicate a missing international prefix
+				throw new SyntaxException(string, "Telephone number missing national destination code");	//indicate a missing international prefix
 			}
 		}
 		else	//if there is no country code
 		{
-			throw new TelephoneNumberSyntaxException(string, "Telephone number missing country code");	//indicate a missing international prefix
+			throw new SyntaxException(string, "Telephone number missing country code");	//indicate a missing international prefix
 		}
 		setReferenceURI(URI.create("tel:"+toString(CharacterConstants.NULL_CHAR)));	//construct and set the reference URI 
 	}
