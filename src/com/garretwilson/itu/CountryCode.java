@@ -1,17 +1,54 @@
 package com.garretwilson.itu;
 
-/**Country code information for international public telecommunication numbers
-	for geographic areas as defined in ITU-T E.164,
+import java.util.Locale;
+
+/**Country code information for international public telecommunication numbers for geographic areas as defined in ITU-T E.164,
 	"The international public telecommunication numbering plan".
-	Information from Annex to ITU Operational Bulletin No. 763 – 1.V.2002,
-	"List of ITU-T Recommendatoin E.164 Assigned Country Codes
-	(Position on 1 May 2002)".
+	Information from Annex to ITU Operational Bulletin No. 763 – 1.V.2002, "List of ITU-T Recommendatoin E.164 Assigned Country Codes (Position on 1 May 2002)".
 	Country codes are associated with country codes of ISO 3166 at
-	<a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html</a>.
+	<a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">ISO 3166 Codes (Countries)</a>.
+@see <a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">ISO 3166 Codes (Countries)</a>
 @author Garret Wilson
 */
-public class CountryCode
+public enum CountryCode
 {
+
+	US(1),
+
+	CA(1);
+	
+	/**The value of this telephone country code.*/
+	private final int value;
+
+		/**@return The value of this telephone country code.*/
+		public int getValue() {return value;}
+
+	/**Value constructor.
+	@param value The value of the telephone country code.
+	*/
+	CountryCode(final int value)
+	{
+		this.value=value;	//save the value
+	}
+
+	/**Retrieves a country code based upon the given locale's country, if present.
+	The country code is determined by the locale's country, if present.
+	@param locale The locale from which to determine a country code.
+	@return A country code for the given locale, or <code>null</code> if this locale has no country designation or if no country code could be determined.
+	@see Locale#getCountry()
+	*/
+	public static CountryCode getCountryCode(final Locale locale)
+	{
+		try
+		{
+			return valueOf(locale.getCountry());	//see if we have a country code to match the locale's country, which will be two uppercase letters or the empty string, and never null
+		}
+		catch(final IllegalArgumentException illegalArgumentException)	//if we have no matching country code
+		{
+			return null;	//indicate that we couldn't find a country cod
+		}
+	}
+
 /*G***fix
 "AF",	93	Afghanistan (Islamic State of)	
 "AL",	355	Albania (Republic of)	
