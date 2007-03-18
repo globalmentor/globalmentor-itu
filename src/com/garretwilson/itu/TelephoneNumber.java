@@ -11,6 +11,7 @@ import static com.garretwilson.lang.StringBuilderUtilities.*;
 
 import com.garretwilson.lang.ObjectUtilities;
 import com.garretwilson.model.*;
+import com.garretwilson.net.Resource;
 import com.garretwilson.text.ArgumentSyntaxException;
 import com.garretwilson.text.CharacterConstants;
 import static com.garretwilson.text.CharacterConstants.*;
