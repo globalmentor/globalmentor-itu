@@ -161,7 +161,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	@param cc The country code for geographic areas.
 	@param ndc The national destination code
 	@param sn The subscriber number.
-	@exception SyntaxException Thrown if the value violates ITU-T E.164 or ITU-T E.123.
+	@exception ArgumentSyntaxException Thrown if the value violates ITU-T E.164 or ITU-T E.123.
 	*/
 	public TelephoneNumber(final String cc, final String ndc, final String sn) throws ArgumentSyntaxException
 	{
@@ -540,7 +540,8 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	}
 
 	/**Constructs a string representation of the telephone number.
-	This implementation returns the canonical version of the telephone number. 
+	This implementation returns the canonical version of the telephone number.
+	@return A string representation of the telephone number.
 	@see #getCanonicalString()
 	*/
 	public String toString()
