@@ -552,7 +552,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	//Resource
 
 	/**@return The resource identifier URI, or <code>null</code> if the identifier is not known.*/
-	public URI getReferenceURI()	//TODO decide if we want to implement resource
+	public URI getURI()	//TODO decide if we want to implement resource
 	{
 		return URI.create("tel:"+getSimpleString('-'));	//construct the reference URI TODO fix to work with TEL URI RFC TODO
 	}
