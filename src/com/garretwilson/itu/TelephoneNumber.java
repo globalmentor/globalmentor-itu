@@ -6,10 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.garretwilson.itu.CountryCode.*;
-import static com.garretwilson.lang.ObjectUtilities.*;
+import static com.garretwilson.lang.Objects.*;
 import static com.garretwilson.lang.StringBuilderUtilities.*;
 
-import com.garretwilson.lang.ObjectUtilities;
+import com.garretwilson.lang.Objects;
 import com.garretwilson.model.*;
 import com.garretwilson.net.Resource;
 import com.garretwilson.text.ArgumentSyntaxException;
@@ -509,7 +509,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	/**@return A hash code representing this object.*/
 	public int hashCode()
 	{
-		return ObjectUtilities.hashCode(getCC(), getNDCString(), Arrays.hashCode(getSNComponentStrings()));	//return a hash code for the country code, NDC string, and SN component strings
+		return Objects.hashCode(getCC(), getNDCString(), Arrays.hashCode(getSNComponentStrings()));	//return a hash code for the country code, NDC string, and SN component strings
 	}
 
 	/**Determines if this object is equivalent to another object.
@@ -521,7 +521,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 		if(object instanceof TelephoneNumber)	//if the other object is a telephone number
 		{
 			final TelephoneNumber telephoneNumber=(TelephoneNumber)object;	//get the other object as a telephone number
-			return getCC()==telephoneNumber.getCC() && ObjectUtilities.equals(getNDCString(), telephoneNumber.getNDCString()) && Arrays.equals(getSNComponentStrings(), telephoneNumber.getSNComponentStrings());	//compare CC, NDC string, and SN component strings
+			return getCC()==telephoneNumber.getCC() && Objects.equals(getNDCString(), telephoneNumber.getNDCString()) && Arrays.equals(getSNComponentStrings(), telephoneNumber.getSNComponentStrings());	//compare CC, NDC string, and SN component strings
 		}
 		else	//if the other object is not a telephone number
 		{
