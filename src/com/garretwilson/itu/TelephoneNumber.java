@@ -14,7 +14,7 @@ import com.garretwilson.text.Characters;
 import static com.garretwilson.text.Characters.*;
 import static com.garretwilson.text.FormatUtilities.*;
 import static com.globalmentor.java.Objects.*;
-import static com.globalmentor.java.StringBuilderUtilities.*;
+import static com.globalmentor.java.StringBuilders.*;
 
 import com.garretwilson.util.*;
 import com.globalmentor.java.Objects;
