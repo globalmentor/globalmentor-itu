@@ -10,13 +10,13 @@ import static com.garretwilson.itu.CountryCode.*;
 import com.garretwilson.model.*;
 import com.garretwilson.net.Resource;
 import com.garretwilson.text.ArgumentSyntaxException;
-import com.garretwilson.text.Characters;
-import static com.garretwilson.text.Characters.*;
 import static com.garretwilson.text.FormatUtilities.*;
+import static com.globalmentor.java.Characters.*;
 import static com.globalmentor.java.Objects.*;
 import static com.globalmentor.java.StringBuilders.*;
 
 import com.garretwilson.util.*;
+import com.globalmentor.java.Characters;
 import com.globalmentor.java.Objects;
 
 /**International public telecommunication number for geographic areas as defined in ITU-T E.164,
