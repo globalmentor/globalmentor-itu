@@ -12,7 +12,7 @@ import com.garretwilson.net.Resource;
 import static com.globalmentor.java.Characters.*;
 import static com.globalmentor.java.Objects.*;
 import static com.globalmentor.java.StringBuilders.*;
-import static com.globalmentor.text.FormatUtilities.*;
+import static com.globalmentor.text.TextFormatter.*;
 
 import com.globalmentor.java.Characters;
 import com.globalmentor.java.Objects;
