@@ -1,10 +1,26 @@
-package com.garretwilson.itu;
+/*
+ * Copyright Â© 1996-2008 GlobalMentor, Inc. <http://www.globalmentor.com/>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.globalmentor.itu;
 
 import java.util.Locale;
 
 /**Country code information for international public telecommunication numbers for geographic areas as defined in ITU-T E.164,
 	"The international public telecommunication numbering plan".
-	Information from Annex to ITU Operational Bulletin No. 763 – 1.V.2002, "List of ITU-T Recommendatoin E.164 Assigned Country Codes (Position on 1 May 2002)".
+	Information from Annex to ITU Operational Bulletin No. 763 â€” 1.V.2002, "List of ITU-T Recommendatoin E.164 Assigned Country Codes (Position on 1 May 2002)".
 	Country codes are associated with country codes of ISO 3166 at
 	<a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">ISO 3166 Codes (Countries)</a>.
 @see <a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">ISO 3166 Codes (Countries)</a>
@@ -49,7 +65,7 @@ public enum CountryCode
 		}
 	}
 
-/*G***fix
+/*TODO fix
 "AF",	93	Afghanistan (Islamic State of)	
 "AL",	355	Albania (Republic of)	
 "",	213	Algeria (People's Democratic Republic of)	
@@ -99,7 +115,7 @@ public enum CountryCode
 "",	242	Congo (Republic of the)	
 "",	682	Cook Islands	
 "",	506	Costa Rica	
-"",	225	Côte d'Ivoire (Republic of)	
+"",	225	Cï¿½te d'Ivoire (Republic of)	
 "",	385	Croatia (Republic of)	
 "",	53	Cuba	
 "",	357	Cyprus (Republic of)	
@@ -125,7 +141,7 @@ public enum CountryCode
 	358	Finland	
 	33	France	
 	594	French Guiana (French Department of)	
-	689	French Polynesia (Territoire français d'outre-mer)	
+	689	French Polynesia (Territoire franï¿½ais d'outre-mer)	
 	241	Gabonese Republic	
 	220	Gambia (Republic of the)	
 	995	Georgia	
@@ -191,7 +207,7 @@ public enum CountryCode
 	596	Martinique (French Department of)	
 	222	Mauritania (Islamic Republic of)	
 	230	Mauritius (Republic of)	
-	269	Mayotte (Collectivité territoriale de la République française)	c
+	269	Mayotte (Collectivitï¿½ territoriale de la Rï¿½publique franï¿½aise)	c
 	52	Mexico	
 	691	Micronesia (Federated States of)	
 	373	Moldova (Republic of)	
@@ -206,7 +222,7 @@ public enum CountryCode
 	977	Nepal	
 	31	Netherlands (Kingdom of the)	
 	599	Netherlands Antilles	
-	687	New Caledonia (Territoire français d'outre-mer)	
+	687	New Caledonia (Territoire franï¿½ais d'outre-mer)	
 	64	New Zealand	
 	505	Nicaragua	
 	227	Niger (Republic of the)	
@@ -233,7 +249,7 @@ public enum CountryCode
 	290	Saint Helena	
 	1	Saint Kitts and Nevis	b
 	1	Saint Lucia	b
-	508	Saint Pierre and Miquelon (Collectivité territoriale de la République française)	
+	508	Saint Pierre and Miquelon (Collectivitï¿½ territoriale de la Rï¿½publique franï¿½aise)	
 	1	Saint Vincent and the Grenadines	b
 	685	Samoa (Independent State of)	
 	378	San Marino (Republic of)	
@@ -283,7 +299,7 @@ public enum CountryCode
 	39	Vatican City State	
 	58	Venezuela (Bolivarian Republic of)	
 	84	Viet Nam (Socialist Republic of)	
-	681	Wallis and Futuna (Territoire français d'outre-mer)	
+	681	Wallis and Futuna (Territoire franï¿½ais d'outre-mer)	
 	967	Yemen (Republic of)	
 	381	Yugoslavia (Federal Republic of)	
 	260	Zambia (Republic of)	
@@ -293,11 +309,11 @@ public enum CountryCode
 	0	Reserved	a
 	886	Reserved	
 	970	Reserved	l
-	875	Reserved – Maritime Mobile Service Applications	
-	876	Reserved – Maritime Mobile Service Applications	
-	877	Reserved – Maritime Mobile Service Applications	
-	969	Reserved – Reservation currently under investigation	
-	878	Reserved – Universal Personal Telecommunication Service (UPT)	e
+	875	Reserved ï¿½ Maritime Mobile Service Applications	
+	876	Reserved ï¿½ Maritime Mobile Service Applications	
+	877	Reserved ï¿½ Maritime Mobile Service Applications	
+	969	Reserved ï¿½ Reservation currently under investigation	
+	878	Reserved ï¿½ Universal Personal Telecommunication Service (UPT)	e
 	888	Reserved for future global service	
 	879	Reserved for national non-commercial purposes	
 	210	Spare code	

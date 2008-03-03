@@ -1,22 +1,34 @@
-package com.garretwilson.itu;
+/*
+ * Copyright © 1996-2008 GlobalMentor, Inc. <http://www.globalmentor.com/>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.globalmentor.itu;
 
 import java.net.URI;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
-import static com.garretwilson.itu.CountryCode.*;
-
-import com.garretwilson.model.*;
 import com.garretwilson.net.Resource;
-import static com.globalmentor.java.Characters.*;
-import static com.globalmentor.java.Objects.*;
-import static com.globalmentor.java.StringBuilders.*;
-import static com.globalmentor.text.TextFormatter.*;
 
 import com.globalmentor.java.Characters;
+import static com.globalmentor.java.Characters.*;
 import com.globalmentor.java.Objects;
+import static com.globalmentor.java.Objects.*;
+import static com.globalmentor.java.StringBuilders.*;
 import com.globalmentor.text.ArgumentSyntaxException;
+import static com.globalmentor.text.TextFormatter.*;
 
 /**International public telecommunication number for geographic areas as defined in ITU-T E.164,
 	"The international public telecommunication numbering plan".
@@ -554,15 +566,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	/**@return The resource identifier URI, or <code>null</code> if the identifier is not known.*/
 	public URI getURI()	//TODO decide if we want to implement resource
 	{
-		return URI.create("tel:"+getSimpleString('-'));	//construct the reference URI TODO fix to work with TEL URI RFC TODO
-	}
-
-	/**Sets the reference URI of the resource.
-	@param uri The new reference URI, or <code>null</code> if the identifier is not known.
-	*/
-	public void setReferenceURI(final URI uri)	//TODO del this from the Resource interface when we can
-	{
-		throw new UnsupportedOperationException("TelephoneNumber.setReferenceURI() is not supported.");
+		return URI.create("tel:"+getSimpleString('-'));	//construct the reference URI TODO fix to work with TEL URI RFC
 	}
 
 }
