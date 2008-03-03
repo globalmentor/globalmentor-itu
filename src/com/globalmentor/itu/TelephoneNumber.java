@@ -20,11 +20,12 @@ import java.net.URI;
 import java.util.*;
 import java.util.regex.*;
 
-import com.garretwilson.net.Resource;
 
 import com.globalmentor.java.Characters;
 import static com.globalmentor.java.Characters.*;
 import com.globalmentor.java.Objects;
+import com.globalmentor.net.Resource;
+
 import static com.globalmentor.java.Objects.*;
 import static com.globalmentor.java.StringBuilders.*;
 import com.globalmentor.text.ArgumentSyntaxException;
