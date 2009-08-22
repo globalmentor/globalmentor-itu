@@ -266,7 +266,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 		final int snComponentCount;	//we'll find out how many subscriber number components there are
 		//TODO make sure the sequence doesn't start with a space
 		final String[] components=SPACING_PATTERN.split(telephoneNumberStringBuilder);	//get the components of the telephone number, using any modifications we made up front
-//TODO del Debug.trace("Found components", Arrays.toString(components));
+//TODO del Log.trace("Found components", Arrays.toString(components));
 		final int componentCount=components.length;	//find out the number of components
 		int componentIndex=0;	//start at the first component
 			//country code
