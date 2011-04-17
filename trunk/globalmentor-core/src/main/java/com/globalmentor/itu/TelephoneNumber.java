@@ -116,13 +116,13 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	private final int cc;
 
 	/** @return The Country Code (CC) for geographic areas, or -1 if this is a local number. */
-	public int getCC()
+	public int getCountryCode()
 	{
 		return cc;
 	}
 
 	/** @return The Country Code (CC) string for geographic areas, or <code>null</code> if this is a local number. */
-	public String getCCString()
+	public String getCountryCodeString()
 	{
 		return cc >= 0 ? Integer.toString(cc) : null;
 	}
@@ -150,13 +150,13 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	private final long ndc;
 
 	/** @return The National Destination Code (NDC), or -1 if there is no NDC. */
-	public long getNDC()
+	public long getNationalDestinationCode()
 	{
 		return ndc;
 	}
 
 	/** @return The National Destination Code (NDC) string, or <code>null</code> if there is no NDC. */
-	public String getNDCString()
+	public String getNationalDestinationCodeString()
 	{
 		return ndc >= 0 ? Long.toString(ndc) : null;
 	}
@@ -171,7 +171,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	private long[] snComponents;
 
 	/** @return The components of the Subscriber Number (SN). */
-	public long[] getSNComponents()
+	public long[] getSubscriberNumberComponents()
 	{
 		return snComponents.clone();
 	}
@@ -180,7 +180,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	private String[] snComponentStrings;
 
 	/** @return The component strings of the Subscriber Number (SN). */
-	public String[] getSNComponentStrings()
+	public String[] getSubscriberNumberComponentStrings()
 	{
 		return snComponentStrings.clone();
 	}
@@ -192,15 +192,15 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	 * @return A string representing the subscriber number.
 	 * @see Characters#NULL_CHAR
 	 */
-	public String getSNString(final char delimiter)
+	public String getSubscriberNumberString(final char delimiter)
 	{
-		return formatList(new StringBuilder(), delimiter, getSNComponentStrings()).toString(); //format the SN components into a list
+		return formatList(new StringBuilder(), delimiter, getSubscriberNumberComponentStrings()).toString(); //format the SN components into a list
 	}
 
 	/** @return A string representing the Subscriber Number (SN) with component separated by spaces as specified in ITU-T E.123. */
-	public String getSNString()
+	public String getSubscriberNumberString()
 	{
-		return getSNString(COMPONENT_SEPARATOR); //create the subscriber number, using a space as a delimiter
+		return getSubscriberNumberString(COMPONENT_SEPARATOR); //create the subscriber number, using a space as a delimiter
 	}
 
 	/**
@@ -379,12 +379,12 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 			throw new IllegalStateException("International string cannot be constructed for a local telephone number.");
 		}
 		final StringBuilder stringBuilder = new StringBuilder(); //create a string buffer to hold the telephone number
-		stringBuilder.append(INTERNATIONAL_PREFIX_SYMBOL).append(getCCString()); //append the country code
+		stringBuilder.append(INTERNATIONAL_PREFIX_SYMBOL).append(getCountryCodeString()); //append the country code
 		if(delimiter != NULL_CHAR) //if the delimiter is not the null character
 		{
 			stringBuilder.append(delimiter); //add the delimiter
 		}
-		final long ndc = getNDC(); //get the national destination code, if there is one; don't use the string, as it may be prefixed by zeros
+		final long ndc = getNationalDestinationCode(); //get the national destination code, if there is one; don't use the string, as it may be prefixed by zeros
 		if(ndc >= 0) //if there is an NDC
 		{
 			stringBuilder.append(ndc); //append the national destination code
@@ -393,7 +393,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 				stringBuilder.append(delimiter); //add the delimiter
 			}
 		}
-		stringBuilder.append(getSNString(delimiter)); //append the subscriber number, using the given delimiter
+		stringBuilder.append(getSubscriberNumberString(delimiter)); //append the subscriber number, using the given delimiter
 		return stringBuilder.toString(); //return the telephone number we constructed 
 	}
 
@@ -410,7 +410,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	protected String getNationalString(final char delimiter, final boolean simple)
 	{
 		final StringBuilder stringBuilder = new StringBuilder(); //create a string buffer to hold the telephone number
-		final String ndcString = getNDCString(); //get the national destination code, if there is one
+		final String ndcString = getNationalDestinationCodeString(); //get the national destination code, if there is one
 		if(ndcString != null) //if there is an NDC string
 		{
 			if(!simple) //if this should not be simple
@@ -432,7 +432,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 				stringBuilder.append(' '); //separate the NDC with a space, regardless of the requested delimiter
 			}
 		}
-		stringBuilder.append(getSNString(delimiter)); //append the subscriber number, using the given delimiter
+		stringBuilder.append(getSubscriberNumberString(delimiter)); //append the subscriber number, using the given delimiter
 		return stringBuilder.toString(); //return the telephone number we constructed 
 	}
 
@@ -553,37 +553,41 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	/** @return A hash code representing this object. */
 	public int hashCode()
 	{
-		return Objects.hashCode(getCC(), getNDCString(), java.util.Arrays.hashCode(getSNComponentStrings())); //return a hash code for the country code, NDC string, and SN component strings
+		return Objects.hashCode(getCountryCode(), getNationalDestinationCodeString(), java.util.Arrays.hashCode(getSubscriberNumberComponentStrings())); //return a hash code for the country code, NDC string, and SN component strings
 	}
 
 	/**
 	 * Determines if this object is equivalent to another object. This method considers another object equivalent if it is another telephone number with the same
-	 * country code, NDC strings, and SN component strings.
+	 * Country Code and National Significant Number.
 	 * @return <code>true</code> if the given object is an equivalent telephone number.
 	 */
 	public boolean equals(final Object object)
 	{
-		if(object instanceof TelephoneNumber) //if the other object is a telephone number
+		if(this == object)
 		{
-			final TelephoneNumber telephoneNumber = (TelephoneNumber)object; //get the other object as a telephone number
-			return getCC() == telephoneNumber.getCC() && Objects.equals(getNDCString(), telephoneNumber.getNDCString())
-					&& java.util.Arrays.equals(getSNComponentStrings(), telephoneNumber.getSNComponentStrings()); //compare CC, NDC string, and SN component strings
+			return true;
 		}
-		else
-		//if the other object is not a telephone number
+		if(!(object instanceof TelephoneNumber)) //if the other object is a telephone number
 		{
-			return false; //the objects aren't equal
+			return false;
 		}
+		final TelephoneNumber telephoneNumber = (TelephoneNumber)object; //get the other object as a telephone number
+		return getCountryCode() == telephoneNumber.getCountryCode() && getNationalNumber() == telephoneNumber.getNationalNumber();
 	}
 
 	/**
-	 * Compares this object with the specified object for order. This implementation compares canonical string representations.
+	 * Compares this object with the specified object for order. This implementation compares first country code and then National Significant Number.
 	 * @param telephoneNumber The object to be compared.
 	 * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
 	 */
 	public int compareTo(final TelephoneNumber telephoneNumber)
 	{
-		return getCanonicalString().compareTo(telephoneNumber.getCanonicalString()); //compare canonical string representations
+		int result = getCountryCode() - telephoneNumber.getCountryCode();
+		if(result == 0)
+		{
+			result = Longs.compare(getNationalNumber(), telephoneNumber.getNationalNumber());
+		}
+		return result;
 	}
 
 	/**

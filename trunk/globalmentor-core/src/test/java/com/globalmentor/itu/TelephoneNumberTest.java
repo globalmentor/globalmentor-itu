@@ -36,8 +36,8 @@ public class TelephoneNumberTest
 	protected void testTelephoneNumber14155551212(final TelephoneNumber telephoneNumber)
 	{
 		assertThat(telephoneNumber.toString(), is("+14155551212"));
-		assertThat(telephoneNumber.getCC(), is(1));
-		assertThat(telephoneNumber.getCCString(), is("1"));
+		assertThat(telephoneNumber.getCountryCode(), is(1));
+		assertThat(telephoneNumber.getCountryCodeString(), is("1"));
 		assertThat(telephoneNumber.getNationalNumber(), is(4155551212L));
 		assertThat(telephoneNumber.getNationalNumberString(), is("4155551212"));
 		//TODO add tests for NDC and SN components once those are implemented for all variations
