@@ -484,12 +484,12 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	*/
 
 	/**
-	 * Constructs a string representation of the telephone number in international format if possible.
+	 * Constructs a human-readable string representation of the telephone number in international format if possible.
 	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
 	 *          should be used.
 	 * @return A string representation of the telephone number using the specified delimiter.
 	 */
-	public String getString(final char delimiter) //TODO rename to format
+	public String getLabel(final char delimiter)
 	{
 		if(isGlobal()) //if this is a global telephone number
 		{
@@ -503,13 +503,13 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	}
 
 	/**
-	 * Constructs a string representation of the telephone number as specified in ITU-T E.123, using international format if possible.
+	 * Constructs a human-readable string representation of the telephone number as specified in ITU-T E.123, using international format if possible.
 	 * @return A string representation of the telephone number as specified in ITU-T E.123.
 	 * @see #COMPONENT_SEPARATOR
 	 */
-	public String getCanonicalString()
+	public String getLabel()
 	{
-		return getString(COMPONENT_SEPARATOR); //return the string, using a space as a delimiter
+		return getLabel(COMPONENT_SEPARATOR); //return the string, using a space as a delimiter
 	}
 
 	/**
@@ -591,14 +591,27 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	}
 
 	/**
-	 * Returns a string representation of the telephone number. This implementation returns the E.164 canonical version of the telephone number with no delimiters
-	 * except the beginning international prefix symbol if this is a global number.
+	 * Returns the E.164 canonical representation of the telephone number, with no delimiters except the beginning international prefix symbol if this is a global
+	 * number.
+	 * @return The canonical string representation of the telephone number.
+	 */
+	public String getCanonicalString()
+	{
+		return string;
+	}
+
+	/**
+	 * Returns a string representation of the telephone number.
+	 * <p>
+	 * This implementation returns the E.164 canonical version of the telephone number, with no delimiters except the beginning international prefix symbol if
+	 * this is a global number.
+	 * </p>
 	 * @return A string representation of the telephone number.
 	 * @see #getCanonicalString()
 	 */
 	public String toString()
 	{
-		return string;
+		return getCanonicalString();
 	}
 
 	//Resource
