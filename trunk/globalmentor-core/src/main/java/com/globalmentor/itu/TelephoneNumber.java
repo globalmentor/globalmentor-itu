@@ -710,7 +710,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 			if(ndcIndicated == true)
 			{
 				ndcString = components[0]; //the first component is the NDC
-				snComponentStrings = com.globalmentor.collections.Arrays.createCopy(components, 1); //use the other components for the SN components
+				snComponentStrings = com.globalmentor.java.Arrays.createCopy(components, 1); //use the other components for the SN components
 			}
 			else
 			//if no NDC was indicated
