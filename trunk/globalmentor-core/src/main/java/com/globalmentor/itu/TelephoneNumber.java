@@ -553,7 +553,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	/** @return A hash code representing this object. */
 	public int hashCode()
 	{
-		return Objects.hashCode(getCountryCode(), getNationalDestinationCodeString(), java.util.Arrays.hashCode(getSubscriberNumberComponentStrings())); //return a hash code for the country code, NDC string, and SN component strings
+		return Objects.getHashCode(getCountryCode(), getNationalDestinationCodeString(), getSubscriberNumberComponentStrings()); //return a hash code for the country code, NDC string, and SN component strings
 	}
 
 	/**
