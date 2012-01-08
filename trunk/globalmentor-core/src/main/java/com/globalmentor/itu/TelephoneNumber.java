@@ -1,5 +1,5 @@
 /*
- * Copyright © 1996-2011 GlobalMentor, Inc. <http://www.globalmentor.com/>
+ * Copyright © 1996-2012 GlobalMentor, Inc. <http://www.globalmentor.com/>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -187,14 +187,13 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 
 	/**
 	 * Constructs a string with the Subscriber Number (SN), separating the components with the given delimiter.
-	 * @param delimiter The delimiter to use to separate the subscriber number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
-	 *          should be used.
+	 * @param delimiter The delimiter to use to separate the subscriber number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @return A string representing the subscriber number.
-	 * @see Characters#NULL_CHAR
+	 * @see Characters#UNDEFINED_CHAR
 	 */
 	public String getSubscriberNumberString(final char delimiter)
 	{
-		return formatList(new StringBuilder(), delimiter, getSubscriberNumberComponentStrings()).toString(); //format the SN components into a list
+		return formatList(delimiter, getSubscriberNumberComponentStrings()); //format the SN components into a list
 	}
 
 	/** @return A string representing the Subscriber Number (SN) with component separated by spaces as specified in ITU-T E.123. */
@@ -365,11 +364,10 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	/**
 	 * Constructs a string representation of the telephone number in international format according to ITU-T E.123 using the given delimiter. This method must
 	 * only be called on a global telephone number.
-	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
-	 *          should be used.
+	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @return An international string representation of the telephone number using the specified delimiter.
 	 * @exception IllegalStateException if this is not a global telephone number.
-	 * @see Characters#NULL_CHAR
+	 * @see Characters#UNDEFINED_CHAR
 	 * @see #isGlobal()
 	 */
 	protected String getInternationalString(final char delimiter)
@@ -380,7 +378,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 		}
 		final StringBuilder stringBuilder = new StringBuilder(); //create a string buffer to hold the telephone number
 		stringBuilder.append(INTERNATIONAL_PREFIX_SYMBOL).append(getCountryCodeString()); //append the country code
-		if(delimiter != NULL_CHAR) //if the delimiter is not the null character
+		if(delimiter != UNDEFINED_CHAR) //if the delimiter is not the null character
 		{
 			stringBuilder.append(delimiter); //add the delimiter
 		}
@@ -388,7 +386,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 		if(ndc >= 0) //if there is an NDC
 		{
 			stringBuilder.append(ndc); //append the national destination code
-			if(delimiter != NULL_CHAR) //if the delimiter is not the null character
+			if(delimiter != UNDEFINED_CHAR) //if the delimiter is not the null character
 			{
 				stringBuilder.append(delimiter); //add the delimiter
 			}
@@ -401,11 +399,10 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	 * Constructs a string representation of the telephone number in national format according to ITU-T E.123 using the given delimiter. If a simple national
 	 * string is requested, no parentheses are used for the NDC and the given delimiter is used following the NDC. Otherwise, a space is used after the NDC,
 	 * regardless of the delimiter requested.
-	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
-	 *          should be used.
+	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @param simple <code>false</code> if the NDC should be surrounded by parentheses.
 	 * @return A national string representation of the telephone number using the specified delimiter.
-	 * @see Characters#NULL_CHAR
+	 * @see Characters#UNDEFINED_CHAR
 	 */
 	protected String getNationalString(final char delimiter, final boolean simple)
 	{
@@ -420,7 +417,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 			stringBuilder.append(ndcString); //append the national destination code
 			if(simple) //if this should be a simple national string
 			{
-				if(delimiter != NULL_CHAR) //if the delimiter is not the null character
+				if(delimiter != UNDEFINED_CHAR) //if the delimiter is not the null character
 				{
 					stringBuilder.append(delimiter); //add the delimiter
 				}
@@ -439,10 +436,9 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	/**
 	 * Constructs a string representation of the telephone number in national format according to ITU-T E.123 using the given delimiter. A space is used after the
 	 * NDC, regardless of the delimiter requested.
-	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
-	 *          should be used.
+	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @return A national string representation of the telephone number using the specified delimiter.
-	 * @see Characters#NULL_CHAR
+	 * @see Characters#UNDEFINED_CHAR
 	 */
 	public String getNationalString(final char delimiter) //TODO rename to format
 	{
@@ -461,10 +457,9 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 
 	/**
 	 * Constructs a simple string representation of the telephone number in national format using the given delimiter.
-	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
-	 *          should be used.
+	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @return A national string representation of the telephone number using the specified delimiter.
-	 * @see Characters#NULL_CHAR
+	 * @see Characters#UNDEFINED_CHAR
 	 */
 	public String getSimpleNationalString(final char delimiter) //TODO rename to format
 	{
@@ -474,19 +469,18 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	/**
 	 * Constructs a simple string representation of the telephone number in national format with no delimiter.
 	 * @return A national string representation of the telephone number.
-	 * @see CharacterConstants#NULL_CHAR
+	 * @see CharacterConstants#UNDEFINED_CHAR
 	 */
 	/*TODO del; loses information
 		public String getPlainNationalString()
 		{
-			return getSimpleNationalString(NULL_CHAR);	//return a simple national string using no delimiter
+			return getSimpleNationalString(UNDEFINED_CHAR);	//return a simple national string using no delimiter
 		}
 	*/
 
 	/**
 	 * Constructs a human-readable string representation of the telephone number in international format if possible.
-	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
-	 *          should be used.
+	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @return A string representation of the telephone number using the specified delimiter.
 	 */
 	public String getLabel(final char delimiter)
@@ -514,8 +508,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 
 	/**
 	 * Constructs a simple string representation of the telephone number in international format if possible.
-	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#NULL_CHAR} (Unicode code point 0) if no delimiter
-	 *          should be used.
+	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @return A simple string representation of the telephone number using the specified delimiter.
 	 * @see #getSimpleNationalString(char)
 	 */
@@ -541,7 +534,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 		{
 			if(isGlobal())	//if this is a global telephone number
 			{
-				return getInternationalString(NULL_CHAR);	//return an international string without any delimiter
+				return getInternationalString(UNDEFINED_CHAR);	//return an international string without any delimiter
 			}
 			else	//if this is a local telephone number
 			{
