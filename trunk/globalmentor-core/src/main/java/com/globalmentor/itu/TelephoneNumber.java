@@ -265,8 +265,8 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	 * Constructs a telephone number from a string with no default country code. The string must either be a global number beginning with '+' or a local number.
 	 * The National Destination Code (NDC) may optionally be surrounded by parentheses. The components of the number may be separated by '-', '.', or ' '.
 	 * @param input The character sequence to be parsed into a telephone number.
-	 * @exception NullPointerException if the given character sequence is <code>null</code>.
-	 * @exception ArgumentSyntaxException if the value violates ITU-T E.164 or ITU-T E.123.
+	 * @throws NullPointerException if the given character sequence is <code>null</code>.
+	 * @throws ArgumentSyntaxException if the value violates ITU-T E.164 or ITU-T E.123.
 	 */
 	public TelephoneNumber(final CharSequence input) throws ArgumentSyntaxException
 	{
@@ -279,8 +279,8 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	 * or ' '.
 	 * @param telephoneNumber The character sequence to be parsed into a telephone number.
 	 * @param defaultCC The Country Code (CC) to use by default, or <code>null</code> if no default country code is provided.
-	 * @exception NullPointerException if the given character sequence is <code>null</code>.
-	 * @exception ArgumentSyntaxException if the value violates ITU-T E.164 or ITU-T E.123.
+	 * @throws NullPointerException if the given character sequence is <code>null</code>.
+	 * @throws ArgumentSyntaxException if the value violates ITU-T E.164 or ITU-T E.123.
 	 */
 	public TelephoneNumber(final CharSequence telephoneNumber, final CountryCode defaultCC) throws ArgumentSyntaxException
 	{
@@ -330,7 +330,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 
 	/**
 	 * Canonicizes the components of the telephone number, if possible, based upon the country code. This implementation canonicizes numbers in country code 1.
-	 * @exception ArgumentSyntaxException if the telephone number is not correct for the country code.
+	 * @throws ArgumentSyntaxException if the telephone number is not correct for the country code.
 	 */
 	/*TODO migrate to getLabelString()
 		protected void canonicize() throws ArgumentSyntaxException
@@ -366,7 +366,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber>
 	 * only be called on a global telephone number.
 	 * @param delimiter The delimiter to use to separate the telephone number components, or {@link Characters#UNDEFINED_CHAR} if no delimiter should be used.
 	 * @return An international string representation of the telephone number using the specified delimiter.
-	 * @exception IllegalStateException if this is not a global telephone number.
+	 * @throws IllegalStateException if this is not a global telephone number.
 	 * @see Characters#UNDEFINED_CHAR
 	 * @see #isGlobal()
 	 */
