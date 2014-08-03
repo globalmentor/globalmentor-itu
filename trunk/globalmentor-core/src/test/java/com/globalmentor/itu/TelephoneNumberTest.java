@@ -29,12 +29,10 @@ import com.globalmentor.text.ArgumentSyntaxException;
  * @author Garret Wilson
  * 
  */
-public class TelephoneNumberTest
-{
+public class TelephoneNumberTest {
 
 	/** Tests that the components of a telephone number are equal to +1 415 555 1212. */
-	protected void testTelephoneNumber14155551212(final TelephoneNumber telephoneNumber)
-	{
+	protected void testTelephoneNumber14155551212(final TelephoneNumber telephoneNumber) {
 		assertThat(telephoneNumber.toString(), is("+14155551212"));
 		assertThat(telephoneNumber.getCountryCode(), is(1));
 		assertThat(telephoneNumber.getCountryCodeString(), is("1"));
@@ -44,38 +42,27 @@ public class TelephoneNumberTest
 	}
 
 	@Test
-	public void testConstructorInternationalNumbers()
-	{
+	public void testConstructorInternationalNumbers() {
 		testTelephoneNumber14155551212(new TelephoneNumber("+14155551212"));
-		try
-		{
+		try {
 			new TelephoneNumber("+1 415 555 1212");
 			fail();
+		} catch(final ArgumentSyntaxException argumentSyntaxException) {
 		}
-		catch(final ArgumentSyntaxException argumentSyntaxException)
-		{
-		}
-		try
-		{
+		try {
 			new TelephoneNumber("+1 4155551212");
 			fail();
+		} catch(final ArgumentSyntaxException argumentSyntaxException) {
 		}
-		catch(final ArgumentSyntaxException argumentSyntaxException)
-		{
-		}
-		try
-		{
+		try {
 			new TelephoneNumber("+1 (415) 555-1212");
 			fail();
-		}
-		catch(final ArgumentSyntaxException argumentSyntaxException)
-		{
+		} catch(final ArgumentSyntaxException argumentSyntaxException) {
 		}
 	}
 
 	@Test
-	public void testParseInternationalNumbers()
-	{
+	public void testParseInternationalNumbers() {
 		testTelephoneNumber14155551212(TelephoneNumber.parse("+14155551212"));
 		testTelephoneNumber14155551212(TelephoneNumber.parse("+1 415 555 1212"));
 		testTelephoneNumber14155551212(TelephoneNumber.parse("+1 (415) 555-1212"));
