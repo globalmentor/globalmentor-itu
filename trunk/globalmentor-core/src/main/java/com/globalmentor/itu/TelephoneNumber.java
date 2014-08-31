@@ -64,38 +64,38 @@ import static com.globalmentor.text.TextFormatter.*;
 public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 
 	/** The international prefix symbol of a telephone number ('+'). */
-	public final static char INTERNATIONAL_PREFIX_SYMBOL = '+';
+	public static final char INTERNATIONAL_PREFIX_SYMBOL = '+';
 
 	/** The separator for international telephone number components (' '). */
-	public final static char COMPONENT_SEPARATOR = ' ';
+	public static final char COMPONENT_SEPARATOR = ' ';
 
 	/** Symbols allowed for spacing between components. */
-	public final static Characters SPACING_SYMBOLS = new Characters('-', '.', COMPONENT_SEPARATOR);
+	public static final Characters SPACING_SYMBOLS = new Characters('-', '.', COMPONENT_SEPARATOR);
 
 	/** The regular expression pattern for splitting out components based upon spacing symbols. */
-	protected final static Pattern SPACING_PATTERN = Pattern.compile(createCharacterClass(SPACING_SYMBOLS) + "+");
+	protected static final Pattern SPACING_PATTERN = Pattern.compile(createCharacterClass(SPACING_SYMBOLS) + "+");
 
 	/**
 	 * The regular expression pattern for a Country Code (CC): '+' followed by one to three digits. The first matching group will be the actual country code
 	 * digits.
 	 */
-	public final static Pattern CC_PATTERN = Pattern.compile(escapePatternString(String.valueOf(INTERNATIONAL_PREFIX_SYMBOL)) + "(\\d{1,3})"); //E.164 6.2.1
+	public static final Pattern CC_PATTERN = Pattern.compile(escapePatternString(String.valueOf(INTERNATIONAL_PREFIX_SYMBOL)) + "(\\d{1,3})"); //E.164 6.2.1
 
 	/**
 	 * The regular expression pattern for a National Destination Code (NDC): up to 14 digits, optionally surrounded by parenthesis. The first matching group, if
 	 * non-<code>null</code>, will be the actual national destination code digits without parenthesis, and the second matching group, if non-<code>null</code>,
 	 * will be the actual national destination code digits with parenthesis.
 	 */
-	public final static Pattern NDC_PATTERN = Pattern.compile("(\\d{1,14})|(?:\\((\\d{1,14})\\))"); //E.164 6.2.1
+	public static final Pattern NDC_PATTERN = Pattern.compile("(\\d{1,14})|(?:\\((\\d{1,14})\\))"); //E.164 6.2.1
 
 	/** The regular expression pattern for a Subscriber Number (SN) component: up to 14 digits. */
-	public final static Pattern SN_COMPONENT_PATTERN = Pattern.compile("\\d{1,14}"); //E.164 6.2.1
+	public static final Pattern SN_COMPONENT_PATTERN = Pattern.compile("\\d{1,14}"); //E.164 6.2.1
 
 	/**
 	 * Strings of country codes that are shorter than three digits long; taken from <cite>List of ITU-T Recommendation E-164 Assigned Country Codes (Position on
 	 * 15 April 2009)</cite>, Annex to ITU Operational Bulletin No. 930 – 15.IV.2009.
 	 */
-	private final static Set<String> SHORT_CC_STRINGS = Sets.immutableSetOf("1", "20", "27", "30", "31", "32", "33", "34", "36", "39", "40", "41", "43", "44",
+	private static final Set<String> SHORT_CC_STRINGS = Sets.immutableSetOf("1", "20", "27", "30", "31", "32", "33", "34", "36", "39", "40", "41", "43", "44",
 			"45", "46", "47", "48", "49", "51", "52", "53", "54", "55", "56", "56", "58", "60", "61", "62", "63", "64", "65", "66", "7", "81", "82", "84", "86",
 			"90", "91", "92", "93", "94", "95", "98");
 
