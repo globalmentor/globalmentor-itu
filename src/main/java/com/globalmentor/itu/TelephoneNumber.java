@@ -20,6 +20,8 @@ import java.net.URI;
 import java.util.*;
 import java.util.regex.*;
 
+import static java.util.Objects.*;
+
 import com.globalmentor.collections.*;
 import com.globalmentor.java.CharSequences;
 import com.globalmentor.java.Characters;
@@ -29,7 +31,6 @@ import static com.globalmentor.java.Characters.*;
 import com.globalmentor.java.Objects;
 import com.globalmentor.net.Resource;
 
-import static com.globalmentor.java.Objects.*;
 import static com.globalmentor.java.StringBuilders.*;
 import static com.globalmentor.java.Strings.*;
 
@@ -226,7 +227,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 				nsnStringBuilder.append(snComponent);
 			}
 		} else { //if there are no SN components
-			nsnStringBuilder.append(checkInstance(ndc, "Missing National Significant Number.")); //we only know the NSN
+			nsnStringBuilder.append(requireNonNull(ndc, "Missing National Significant Number.")); //we only know the NSN
 			this.ndc = -1; //we don't know the NDC
 			this.snComponents = Longs.NO_LONGS; //we don't know any SN components
 			this.snComponentStrings = NO_STRINGS;
@@ -561,7 +562,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 	 */
 	public static TelephoneNumber parse(CharSequence telephoneNumber, final int defaultCC) throws ArgumentSyntaxException {
 		final StringBuilder telephoneNumberStringBuilder = new StringBuilder(
-				checkInstance(telephoneNumber, "Telephone number character sequence must not be null.")); //we may need to manipulate the telephone number, first
+				requireNonNull(telephoneNumber, "Telephone number character sequence must not be null.")); //we may need to manipulate the telephone number, first
 		String ccString;
 		if(CharSequences.startsWith(telephoneNumberStringBuilder, INTERNATIONAL_PREFIX_SYMBOL)) { //if this is an international number, parse out the country code
 			ccString = CharSequences.getStartsWith(telephoneNumberStringBuilder, 1, SHORT_CC_STRINGS); //see if the country code is a short string
