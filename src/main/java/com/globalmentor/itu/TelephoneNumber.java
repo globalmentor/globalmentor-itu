@@ -42,8 +42,8 @@ import static com.globalmentor.text.TextFormatter.*;
 /**
  * International public telecommunication number for geographic areas as defined in ITU-T E.164, "The international public telecommunication numbering plan".
  * The default formatting is a string in ITU-T E.164 format with no delimiters except for the introductory international prefix symbol, if any. The label form
- * of the telephone number is formatted according to ITU-T E.123,
- * "Notation for national and international telephone numbers, e-mail addresses and Web addresses".
+ * of the telephone number is formatted according to ITU-T E.123, "Notation for national and international telephone numbers, e-mail addresses and Web
+ * addresses".
  * 
  * <p>
  * Following ITU-T E.164, a telephone number is considered to have the following parts: Country Code (CC) and National (Significant) Number (NSN). The NSN is
@@ -71,7 +71,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 	public static final char COMPONENT_SEPARATOR = ' ';
 
 	/** Symbols allowed for spacing between components. */
-	public static final Characters SPACING_SYMBOLS = new Characters('-', '.', COMPONENT_SEPARATOR);
+	public static final Characters SPACING_SYMBOLS = Characters.of('-', '.', COMPONENT_SEPARATOR);
 
 	/** The regular expression pattern for splitting out components based upon spacing symbols. */
 	protected static final Pattern SPACING_PATTERN = Pattern.compile(createCharacterClass(SPACING_SYMBOLS) + "+");
@@ -97,8 +97,8 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 	 * 15 April 2009)</cite>, Annex to ITU Operational Bulletin No. 930 – 15.IV.2009.
 	 */
 	private static final Set<String> SHORT_CC_STRINGS = Sets.immutableSetOf("1", "20", "27", "30", "31", "32", "33", "34", "36", "39", "40", "41", "43", "44",
-			"45", "46", "47", "48", "49", "51", "52", "53", "54", "55", "56", "56", "58", "60", "61", "62", "63", "64", "65", "66", "7", "81", "82", "84", "86",
-			"90", "91", "92", "93", "94", "95", "98");
+			"45", "46", "47", "48", "49", "51", "52", "53", "54", "55", "56", "56", "58", "60", "61", "62", "63", "64", "65", "66", "7", "81", "82", "84", "86", "90",
+			"91", "92", "93", "94", "95", "98");
 
 	/** The canonical string form of the telephone number, with no delimiters except the beginning international prefix symbol if this is a global number. */
 	private final String string;
