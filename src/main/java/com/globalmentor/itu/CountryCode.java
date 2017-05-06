@@ -19,10 +19,10 @@ package com.globalmentor.itu;
 import java.util.Locale;
 
 /**
- * Country code information for international public telecommunication numbers for geographic areas as defined in ITU-T E.164,
- * "The international public telecommunication numbering plan". Information from Annex to ITU Operational Bulletin No. 763 — 1.V.2002,
- * "List of ITU-T Recommendatoin E.164 Assigned Country Codes (Position on 1 May 2002)". Country codes are associated with country codes of ISO 3166 at <a
- * href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">ISO 3166 Codes (Countries)</a>.
+ * Country code information for international public telecommunication numbers for geographic areas as defined in ITU-T E.164, "The international public
+ * telecommunication numbering plan". Information from Annex to ITU Operational Bulletin No. 763 — 1.V.2002, "List of ITU-T Recommendation E.164 Assigned
+ * Country Codes (Position on 1 May 2002)". Country codes are associated with country codes of ISO 3166 at
+ * <a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">ISO 3166 Codes (Countries)</a>.
  * @see <a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">ISO 3166 Codes (Countries)</a>
  * @author Garret Wilson
  */
