@@ -4,8 +4,8 @@
 
 	<parent>
 		<groupId>com.globalmentor</groupId>
-		<artifactId>globalmentor-opensource-parent</artifactId>
-		<version>8.5.0</version>
+		<artifactId>globalmentor-base</artifactId>
+		<version>0.7.2</version>
 	</parent>
 
 	<artifactId>globalmentor-itu</artifactId>
@@ -13,8 +13,16 @@
 
 	<name>GlobalMentor ITU</name>
 	<description>GlobalMentor Java ITU library.</description>
-	<url>http://www.globalmentor.com/software/</url>
+	<url>https://www.globalmentor.com/software/</url>
 	<inceptionYear>1996</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>Apache-2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<scm>
 		<connection>scm:git:https://bitbucket.org/globalmentor/globalmentor-itu.git</connection>
