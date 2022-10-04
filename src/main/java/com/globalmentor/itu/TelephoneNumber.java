@@ -28,7 +28,6 @@ import com.globalmentor.java.Characters;
 import com.globalmentor.java.Longs;
 
 import static com.globalmentor.java.Characters.*;
-import com.globalmentor.java.Objects;
 import com.globalmentor.net.Resource;
 
 import static com.globalmentor.java.StringBuilders.*;
@@ -74,7 +73,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 	public static final Characters SPACING_SYMBOLS = Characters.of('-', '.', COMPONENT_SEPARATOR);
 
 	/** The regular expression pattern for splitting out components based upon spacing symbols. */
-	protected static final Pattern SPACING_PATTERN = Pattern.compile(createCharacterClass(SPACING_SYMBOLS) + "+");
+	protected static final Pattern SPACING_PATTERN = Pattern.compile(characterClassOf(SPACING_SYMBOLS) + "+");
 
 	/**
 	 * The regular expression pattern for a Country Code (CC): '+' followed by one to three digits. The first matching group will be the actual country code
@@ -183,7 +182,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 	 * @see Characters#UNDEFINED_CHAR
 	 */
 	public String getSubscriberNumberString(final char delimiter) {
-		return formatList(delimiter, getSubscriberNumberComponentStrings()); //format the SN components into a list
+		return formatList(delimiter, (Object[])getSubscriberNumberComponentStrings()); //format the SN components into a list
 	}
 
 	/** @return A string representing the Subscriber Number (SN) with component separated by spaces as specified in ITU-T E.123. */
@@ -476,7 +475,7 @@ public class TelephoneNumber implements Resource, Comparable<TelephoneNumber> {
 
 	/** @return A hash code representing this object. */
 	public int hashCode() {
-		return Objects.getHashCode(getCountryCode(), getNationalDestinationCodeString(), getSubscriberNumberComponentStrings()); //return a hash code for the country code, NDC string, and SN component strings
+		return hash(getCountryCode(), getNationalDestinationCodeString(), getSubscriberNumberComponentStrings()); //return a hash code for the country code, NDC string, and SN component strings
 	}
 
 	/**
