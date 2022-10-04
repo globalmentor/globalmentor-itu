@@ -17,9 +17,10 @@
 package com.globalmentor.itu;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
 import com.globalmentor.text.ArgumentSyntaxException;
 
@@ -27,7 +28,6 @@ import com.globalmentor.text.ArgumentSyntaxException;
  * Tests for telephone numbers.
  * 
  * @author Garret Wilson
- * 
  */
 public class TelephoneNumberTest {
 
@@ -44,21 +44,9 @@ public class TelephoneNumberTest {
 	@Test
 	public void testConstructorInternationalNumbers() {
 		testTelephoneNumber14155551212(new TelephoneNumber("+14155551212"));
-		try {
-			new TelephoneNumber("+1 415 555 1212");
-			fail();
-		} catch(final ArgumentSyntaxException argumentSyntaxException) {
-		}
-		try {
-			new TelephoneNumber("+1 4155551212");
-			fail();
-		} catch(final ArgumentSyntaxException argumentSyntaxException) {
-		}
-		try {
-			new TelephoneNumber("+1 (415) 555-1212");
-			fail();
-		} catch(final ArgumentSyntaxException argumentSyntaxException) {
-		}
+		assertThrows(ArgumentSyntaxException.class, () -> new TelephoneNumber("+1 415 555 1212"));
+		assertThrows(ArgumentSyntaxException.class, () -> new TelephoneNumber("+1 4155551212"));
+		assertThrows(ArgumentSyntaxException.class, () -> new TelephoneNumber("+1 (415) 555-1212"));
 	}
 
 	@Test
